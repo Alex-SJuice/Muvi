@@ -21,24 +21,24 @@ Having it as the desktop background would fix both issues! And also make the com
 
 ## TODO LIST!?!?!?!?!? WOWOWOWOW
 
-[] Getting system audio
+- Getting system audio
 
-	[] windows
+	- windows
 
-	[] linux
+	- linux
 
-	[] mac
+	- mac
 
-[] analyzing the audio in real time
+- analyzing the audio in real time
 
-	[] FFT
+	- FFT
 
-	[] make it run with small snippets of audio
+	- make it run with small snippets of audio
 
-[] displaying to the background
+- displaying to the background
 
-	[] generate the pretty picture
+	- generate the pretty picture
 
-	[] set it as the background
-	
-	[] update the background
+	- set it as the background
+
+	- update the background
