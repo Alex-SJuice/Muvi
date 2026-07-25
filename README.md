@@ -21,7 +21,7 @@ Having it as the desktop background would fix both issues! And also make the com
 
 ## TODO LIST!?!?!?!?!? WOWOWOWOW
 
-- Get system audio || PROTOTYPED
+- Get system audio
 
 - analyze the audio in real time
 
