@@ -1,6 +1,6 @@
 # Muvi
 
-<img src=unfold-muvi.png width=800 />
+<img src=assets\unfold-muvi.png width=800 />
 
 ## Overview
 
@@ -22,6 +22,10 @@ Having it as the desktop background would fix both issues! And also make the com
 ## TODO LIST!?!?!?!?!? WOWOWOWOW
 
 - Get system audio
+
+	- Windows (cuz of course it's different)
+
+	- everyone else
 
 - analyze the audio in real time
 
