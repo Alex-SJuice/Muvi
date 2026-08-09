@@ -7,7 +7,9 @@ name = "Muvi"
 version = "0.1.0"
 dependencies = [
  "cpal",
+ "dft",
  "raylib",
+ "windows",
 ]
 
 [[package]]
@@ -182,7 +184,7 @@ dependencies = [
  "ndk",
  "ndk-context",
  "num-derive",
- "num-traits",
+ "num-traits 0.2.19",
  "objc2",
  "objc2-audio-toolbox",
  "objc2-avf-audio",
@@ -200,6 +202,16 @@ name = "dasp_sample"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c87e182de0887fd5361989c677c4e8f5000cd9491d6d563161a8f3a5519fc7f"
+
+[[package]]
+name = "dft"
+version = "0.5.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "86c83c6ce4ad5d596757571b99ae40694bbfd85453a9ca4862b13cc4cc290407"
+dependencies = [
+ "num-complex",
+ "num-traits 0.1.43",
+]
 
 [[package]]
 name = "dispatch2"
@@ -454,6 +466,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "num-complex"
+version = "0.1.44"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "17cf384bef067563c44d41028840dbecc7f06f2aa5d7881a81dfb0fc7c72f202"
+dependencies = [
+ "autocfg",
+ "num-traits 0.2.19",
+]
+
+[[package]]
 name = "num-derive"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -462,6 +484,15 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "num-traits"
+version = "0.1.43"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "92e5113e9fd4cc14ded8e499429f396a20f98c772a47cc8622a736e1ec843c31"
+dependencies = [
+ "num-traits 0.2.19",
 ]
 
 [[package]]

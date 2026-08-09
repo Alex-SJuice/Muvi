@@ -4,5 +4,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-cpal = "0.18.1"
 raylib = "6.0.0"
+dft = "0.5.5"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+cpal = "0.18.1"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+wasapi = "0.23.0"
