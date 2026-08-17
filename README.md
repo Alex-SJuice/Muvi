@@ -19,6 +19,17 @@ Having it as the desktop background would fix both issues! And also make the com
 (I know this already exsists, but I wanted to make my own version so I can control exactly how it looks)
 
 
+## Tech Used
+
+It's 100% rust (for now)
+
+loopback is using the cpal and wasapi libraries
+
+The visualizer uses the fast fourier transform to analyze the music
+
+I don't even know how I'm gonna write to the desktop background yet ;-;
+
+
 ## TODO LIST!?!?!?!?!? WOWOWOWOW
 
 - Get system audio

@@ -104,13 +104,22 @@ pub mod loopback {
     #[cfg(target_os = "windows")]
     mod window {
         use wasapi::*;
+        use std::thread;
 
         pub struct WindowsCapture {
-            
+            client: AudioClient,
+            session_control: 
+            receiver: mpsc::Receiver<Vec<f32>>,
+            err: mpsc::Receiver<Box<dyn error::Error>>,
+            callback_rate: u32,
+            buffer_size: usize,
         }
 
         impl Capture for WindowsCapture {
             pub fn new() -> Result<Self, Box<dyn error::Error>>{
+                let (data_send, data_receive) = mpsc::channel();
+                let (err_send, err_receive) = mpsc::channel();
+
                 let enumerator = DeviceEnumerator::new()?;
                 let device = enumerator.get_default_device(&Direction::Render)?;
 
@@ -132,7 +141,7 @@ pub mod loopback {
                 let buffer_frame_count = audio_client.get_buffer_size()?;
             
                 let render_client = audio_client.get_audiocaptureclient()?;
-                let mut sample_queue: VecDeque<u8> = VecDeque::with_capacity(
+                let mut sample_queue: VecDeque<f32> = VecDeque::with_capacity(
                     100 * blockalign as usize * (1024 + 2 * buffer_frame_count as usize),
                 );
                 let session_control = audio_client.get_audiosessioncontrol()?;
@@ -140,7 +149,29 @@ pub mod loopback {
                 println!("state before start: {:?}", session_control.get_state());
                 audio_client.start_stream()?;
                 println!("state after start: {:?}", session_control.get_state());
-            
+                
+                WindowsCapture {
+                    client: audio_client.clone(),
+
+                }
+                
+                let join_handle = thread::spawn(move || {
+                    loop {
+                        while sample_queue.len() > (blockalign as usize * chunksize) {
+                            let mut chunk = vec![0.0f32; blockalign as usize * chunksize];
+                            for element in chunk.iter_mut() {
+                                *element = sample_queue.pop_front().unwrap();
+                            }
+                            data_send.send(chunk).unwrap();
+                        }
+                        render_client.read_from_device_to_deque(&mut sample_queue).unwrap();
+                        if h_event.wait_for_event(3000).is_err() {
+                            err_send.send("timeout error, stopping capture");
+                            audio_client.stop_stream().unwrap();
+                            break;
+                        }
+                    }
+                });
             }
             pub fn query_data(&self) -> Vec<f32> {}
             pub fn query_err(&self) -> Option<Box<dyn error::Error>> {}
